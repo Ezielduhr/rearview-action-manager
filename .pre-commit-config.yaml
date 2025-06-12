@@ -1,0 +1,35 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/dnephin/pre-commit-golang
+    rev: v0.5.1
+    hooks:
+      - id: go-fmt
+        files: "^rearview-cam/"
+      - id: go-vet
+        files: "^rearview-cam/"
+      - id: go-lint
+        files: "^rearview-cam/"
+      - id: go-imports
+        files: "^rearview-cam/"
+      - id: go-cyclo
+        args: [-over=15]
+        files: "^rearview-cam/"
+      - id: validate-toml
+        files: "^rearview-cam/"
+      - id: no-go-testing
+        files: "^rearview-cam/"
+      - id: golangci-lint
+        files: "^rearview-cam/"
+      - id: go-critic
+        files: "^rearview-cam/"
+      - id: go-unit-tests
+        files: "^rearview-cam/"
+      - id: go-build
+        files: "^rearview-cam/"
+      - id: go-mod-tidy
+        files: "^rearview-cam/"

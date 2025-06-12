@@ -1,0 +1,61 @@
+services:
+  frontend:
+    image: rearview-action-manager/rearview-mirror:latest
+    ports:
+      - "3000:3000"
+#    networks:
+#      - front-tier
+#      - back-tier
+#    configs:
+#      - httpd-config
+#    secrets:
+#      - server-certificate
+
+  api:
+    image: rearview-action-manager/rearview-cam:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - db-data:/etc/data
+#    networks:
+#      - back-tier
+
+  database:
+    image: postgres:17-alpine
+    restart: always
+    # set shared memory limit when using docker compose
+    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    #volumes:
+    #  - type: tmpfs
+    #    target: /dev/shm
+    #    tmpfs:
+    #      size: 134217728 # 128*2^20 bytes = 128Mb
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - "5432:5432"
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+
+#    networks:
+#      - back-tier
+
+#volumes:
+#  db-data:
+#    driver: flocker
+#    driver_opts:
+#      size: "10GiB"
+#
+#configs:
+#  httpd-config:
+#    external: true
+#
+#secrets:
+#  server-certificate:
+#    external: true
+#
+#networks:
+#  # The presence of these objects is sufficient to define them
+#  front-tier: {}
+#  back-tier: {}

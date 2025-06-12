@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/rearview-action-manager.iml" filepath="$PROJECT_DIR$/rearview-action-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rearview-cam.iml" filepath="$PROJECT_DIR$/rearview-cam/rearview-cam.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rearview-mirror/rearview-mirror.iml" filepath="$PROJECT_DIR$/rearview-mirror/rearview-mirror.iml" />
+    </modules>
+  </component>
+</project>
