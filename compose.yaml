@@ -1,5 +1,5 @@
 services:
-  frontend:
+  mirror:
     image: rearview-action-manager/rearview-mirror:latest
     ports:
       - "3000:3000"
@@ -11,16 +11,19 @@ services:
 #    secrets:
 #      - server-certificate
 
-  api:
+  cam:
     image: rearview-action-manager/rearview-cam:latest
     ports:
       - "8080:8080"
-    volumes:
-      - db-data:/etc/data
+    depends_on:
+      storage:
+        condition: service_healthy
+#    volumes:
+#      - db-data:/etc/data
 #    networks:
 #      - back-tier
 
-  database:
+  storage:
     image: postgres:17-alpine
     restart: always
     # set shared memory limit when using docker compose
@@ -32,20 +35,24 @@ services:
     #    tmpfs:
     #      size: 134217728 # 128*2^20 bytes = 128Mb
     environment:
-      POSTGRES_PASSWORD: example
+      POSTGRES_PASSWORD: publicPass
     ports:
       - "5432:5432"
     volumes:
-      - ~/apps/postgres:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d postgres -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 #    networks:
 #      - back-tier
 
-#volumes:
-#  db-data:
-#    driver: flocker
-#    driver_opts:
-#      size: "10GiB"
+volumes:
+  pgdata:
+    driver: local
+
 #
 #configs:
 #  httpd-config:
