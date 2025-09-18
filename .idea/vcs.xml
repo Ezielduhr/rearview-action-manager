@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/rearview-action-manager-cam" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/rearview-action-manager-mirror" vcs="Git" />
   </component>
 </project>

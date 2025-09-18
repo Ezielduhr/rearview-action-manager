@@ -1,0 +1,6 @@
+[submodule "rearview-action-manager-mirror"]
+	path = rearview-action-manager-mirror
+	url = https://github.com/Ezielduhr/rearview-action-manager-mirror
+[submodule "rearview-action-manager-cam"]
+	path = rearview-action-manager-cam
+	url = https://github.com/Ezielduhr/rearview-action-manager-cam

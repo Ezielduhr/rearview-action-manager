@@ -1,8 +1,21 @@
 services:
   mirror:
     image: rearview-action-manager/rearview-mirror:latest
+    build:
+      context: ./rearview-action-manager-mirror
+      target: mirror-dev
     ports:
-      - "3000:3000"
+      - "5173:5173"
+    develop:
+      watch:
+        - path: ./rearview-action-manager-mirror/src
+          action: sync
+          target: /app/src
+        - path: ./rearview-action-manager-mirror/App.jsx
+          action: sync
+          target: /app/src/App.jsx
+        - path: ./rearview-action-manager-mirror/package.json
+          action: rebuild
 #    networks:
 #      - front-tier
 #      - back-tier
@@ -13,11 +26,21 @@ services:
 
   cam:
     image: rearview-action-manager/rearview-cam:latest
+    build:
+      context: ./rearview-action-manager-cam
+      target: cam-base
     ports:
       - "8080:8080"
     depends_on:
       storage:
         condition: service_healthy
+    develop:
+      watch:
+        - path: ./rearview-action-manager-cam
+          action: sync
+          target: ./rearview-action-manager-cam
+        - path: ./rearview-action-manager-can/go.mod
+          action: rebuild
 #    volumes:
 #      - db-data:/etc/data
 #    networks:
